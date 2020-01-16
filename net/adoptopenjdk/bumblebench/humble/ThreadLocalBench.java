@@ -18,6 +18,7 @@ import net.adoptopenjdk.bumblebench.core.HumbleBench;
 
 public final class ThreadLocalBench extends HumbleBench {
 
+	public static int sum = 0;
 	public ThreadLocalHelper helper;
 	public static String TEXT = option(
 		"text",
@@ -32,13 +33,18 @@ public final class ThreadLocalBench extends HumbleBench {
 		helper = new ThreadLocalHelper();
 	}
 
+
 	public static class Workload extends AbstractWorkload {
+		public void jitme(ThreadLocalBench bench) {
+			bench.helper.getThreadId();
+		}
+
 		@Override
 		public void doBatch(HumbleBench bench0, int numIterations) {
 			ThreadLocalBench bench = (ThreadLocalBench)bench0;
 
 			for (int i = 0; i < numIterations; i++) {
-				bench.helper.getThreadId();
+				jitme(bench);
 			}
 		}
 	}

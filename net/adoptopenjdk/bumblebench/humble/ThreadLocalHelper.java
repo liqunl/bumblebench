@@ -15,7 +15,7 @@ public class ThreadLocalHelper {
          }
      };
 
-     public int getThreadId() {
+     public Object getThreadId() {
 	return threadId.get();
      }
 }
