@@ -181,7 +181,7 @@ public class Util {
 	protected static Class freshlyLoadedClass(final Class original) {
 		try {
 			final String classFileName = "/" + original.getName().replace('.', '/') + ".class";
-			final byte[] classBytes = readFully(original.getClass().getResourceAsStream(classFileName));
+			final byte[] classBytes = readFully(original.getResourceAsStream(classFileName));
 			return new OneOffLoader(original.getName(), classBytes, original.getClassLoader()).loadClass(original.getName());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
